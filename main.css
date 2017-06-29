@@ -159,3 +159,6 @@ h1 {
 .song-list .song:hover {
     background-color: #282828;
 }
+.a::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: red;
+}

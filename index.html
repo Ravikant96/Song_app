@@ -10,7 +10,7 @@
 
 <body>
     <div class="wrapper">
-        <section class="welcome-screen hidden">
+        <section class="welcome-screen">
             <h1> Welcome to Songify </h1>
             <h3> Enter name to access your account </h3>
             <div class="input-wrapper">
@@ -18,7 +18,7 @@
                 <button> Go </button>
             </div>
         </section>
-        <div class="main">
+        <div class="main  hidden">
             <header>
                 <div class="right floated user-name"> </div>
             </header>
@@ -106,7 +106,7 @@
     currentTime = fancyTimeFormat(currentTime);
     var duration = Math.floor(song.duration);
     duration = fancyTimeFormat(duration)
-    //code to fill the seek bar or progress bar according to the song.
+    //code to fill the seek bar or progress bar according to the song
     var filled=(song.currentTime/song.duration);
     filled=filled*700;
     $(".progress-filled").width(filled);
@@ -183,14 +183,18 @@ toggleSong();
 
 
     $('.welcome-screen button').on('click', function() {
-        var name = $('#name-input').val();
-        if (name.length > 2) {
+      var name = $('#name-input').val();
+      var name=name.trim();
+      console.log(name.length);
+      if(name.length>0) {
             var message = "Welcome, " + name;
             $('.main .user-name').text(message);
             $('.welcome-screen').addClass('hidden');
             $('.main').removeClass('hidden');
         } else {
-            $('#name-input').addClass('error');
+          $('#name-input').addClass('error');
+          $('#name-input').attr('placeholder','Invalid text!!!!!!');
+          $('#name-input').addClass('a');
         }
     });
     $('.play-icon').on('click', function() {
