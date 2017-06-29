@@ -55,7 +55,7 @@
                         <div class="player-progress">
                             <div class="progress-filled"> </div>
                         </div>
-                        <span class="song-duration"></span>
+                        <span class="song-duration-bar"></span>
                     </div>
                 </div>
             </footer>
@@ -106,10 +106,13 @@
     currentTime = fancyTimeFormat(currentTime);
     var duration = Math.floor(song.duration);
     duration = fancyTimeFormat(duration)
+    //code to fill the seek bar or progress bar according to the song.
+    var filled=(song.currentTime/song.duration);
+    filled=filled*700;
+    $(".progress-filled").width(filled);
     $('.time-elapsed').text(currentTime);
-    $('.song-duration').text(duration);
-}
-
+    $('.song-duration-bar').text(duration);
+  }
 
 
       window.onload = function() {
@@ -175,7 +178,7 @@ toggleSong();
           updateCurrentTime();
           setInterval(function() {
           updateCurrentTime();
-          },1000);
+          },1);
       }
 
 
