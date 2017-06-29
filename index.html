@@ -113,6 +113,12 @@
     $('.time-elapsed').text(currentTime);
     $('.song-duration-bar').text(duration);
   }
+// this function replays the song once it is fnished
+  function enableLoop() {
+      var audio=document.querySelector('audio');
+      audio.loop = true;
+      audio.load();
+  }
 
 
       window.onload = function() {
@@ -174,7 +180,7 @@ toggleSong();
 }
 });
 
-
+          enableLoop();
           updateCurrentTime();
           setInterval(function() {
           updateCurrentTime();
