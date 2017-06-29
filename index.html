@@ -10,7 +10,7 @@
 
 <body>
     <div class="wrapper">
-        <section class="welcome-screen">
+        <section class="welcome-screen hidden">
             <h1> Welcome to Songify </h1>
             <h3> Enter name to access your account </h3>
             <div class="input-wrapper">
@@ -18,12 +18,12 @@
                 <button> Go </button>
             </div>
         </section>
-        <div class="main  hidden">
+        <div class="main">
             <header>
                 <div class="right floated user-name"> </div>
             </header>
             <section class="content">
-                <audio src="song.mp3"></audio>
+                <audio src="song1.mp3"></audio>
                 <div class="list-headers">
         <div> Title </div>
         <div> Artist </div>
@@ -53,7 +53,7 @@
                     <div class="progress-wrapper">
                         <span class="time-elapsed"> </span>
                         <div class="player-progress">
-                            <div class="progress-filled"> </div>
+                            <div class="progress-filled" id="fill"> </div>
                         </div>
                         <span class="song-duration-bar"></span>
                     </div>
@@ -80,7 +80,7 @@
     }
 
     function fancyTimeFormat(time)
-{
+    {
     // Hours, minutes and seconds
     var hrs = ~~(time / 3600);
     var mins = ~~((time % 3600) / 60);
@@ -91,13 +91,12 @@
 
     if (hrs > 0) {
         ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-    }
+      }
 
     ret += "" + mins + ":" + (secs < 10 ? "0" : "");
     ret += "" + secs;
     return ret;
     }
-
 
 
     function updateCurrentTime() {
@@ -106,21 +105,35 @@
     currentTime = fancyTimeFormat(currentTime);
     var duration = Math.floor(song.duration);
     duration = fancyTimeFormat(duration)
-    //code to fill the seek bar or progress bar according to the song
     var filled=(song.currentTime/song.duration);
     filled=filled*700;
     $(".progress-filled").width(filled);
     $('.time-elapsed').text(currentTime);
     $('.song-duration-bar').text(duration);
   }
-// this function replays the song once it is fnished
-  function enableLoop() {
-      var audio=document.querySelector('audio');
-      audio.loop = true;
-      audio.load();
-  }
 
-
+        // this function replays the song once it is fnished
+              function enableLoop() {
+                  var audio=document.querySelector('audio');
+                  audio.loop = true;
+                  audio.load();
+              }
+              function addSongOnClickEvent(songName,pos)
+              {
+                var id='#song'+pos;
+                $(id).click(function() {
+                  var audio = document.querySelector('audio');
+                  var currentSong = audio.src;
+                  if(currentSong.search(songName) != -1)
+                  {
+                  toggleSong();
+                  }
+                  else {
+                  audio.src = songName;
+                  toggleSong();
+                  }
+                  });
+              }
       window.onload = function() {
 
         var songList = ['Badri Ki Dulhania (Title Track)',
@@ -130,77 +143,77 @@
           $('#song2 .song-name').text(songList[1]);
           $('#song3 .song-name').text(songList[2]);
           $('#song4 .song-name').text(songList[3]);
+          for(var i=0;i<fileNames.length;i++)
+          {
+            addSongOnClickEvent(fileNames[i],i+1);
+          }
 
-          $('#song1').click(function() {
-var audio = document.querySelector('audio');
-var currentSong = audio.src;
-if(currentSong.search(fileNames[0]) != -1)
-{
-toggleSong();
-}
-else {
-audio.src = fileNames[0];
-toggleSong();
-}
-});
-$('#song2').click(function() {
-var audio = document.querySelector('audio');
-var currentSong = audio.src;
-if(currentSong.search(fileNames[1]) != -1)
-{
-toggleSong();
-}
-else {
-audio.src = fileNames[1];
-toggleSong();
-}
-});
-$('#song3').click(function() {
-var audio = document.querySelector('audio');
-var currentSong = audio.src;
-if(currentSong.search(fileNames[2]) != -1)
-{
-toggleSong();
-}
-else {
-audio.src = fileNames[2];
-toggleSong();
-}
-});
-$('#song4').click(function() {
-var audio = document.querySelector('audio');
-var currentSong = audio.src;
-if(currentSong.search(fileNames[3]) != -1)
-{
-toggleSong();
-}
-else {
-audio.src = fileNames[3];
-toggleSong();
-}
-});
+          // $('#song1').click(function() {
+          //   var audio = document.querySelector('audio');
+          //   var currentSong = audio.src;
+          //   if(currentSong.search(fileNames[0]) != -1)
+          //   {
+          //   toggleSong();
+          //   }
+          //   else {
+          //   audio.src = fileNames[0];
+          //   toggleSong();
+          //   }
+          //   });
+          //   $('#song2').click(function() {
+          //   var audio = document.querySelector('audio');
+          //   var currentSong = audio.src;
+          //   if(currentSong.search(fileNames[1]) != -1)
+          //   {
+          //   toggleSong();
+          //   }
+          //   else {
+          //   audio.src = fileNames[1];
+          //   toggleSong();
+          //   }
+          //   });
+          //   $('#song3').click(function() {
+          //   var audio = document.querySelector('audio');
+          //   var currentSong = audio.src;
+          //   if(currentSong.search(fileNames[2]) != -1)
+          //   {
+          //   toggleSong();
+          //   }
+          //   else {
+          //   audio.src = fileNames[2];
+          //   toggleSong();
+          //   }
+          //   });
+          //   $('#song4').click(function() {
+          //   var audio = document.querySelector('audio');
+          //   var currentSong = audio.src;
+          //   if(currentSong.search(fileNames[3]) != -1)
+          //   {
+          //   toggleSong();
+          //   }
+          //   else {
+          //   audio.src = fileNames[3];
+          //   toggleSong();
+          //   }
+          //   });
 
-          enableLoop();
+            enableLoop();
           updateCurrentTime();
           setInterval(function() {
           updateCurrentTime();
-          },1);
+        },1);
       }
 
 
     $('.welcome-screen button').on('click', function() {
-      var name = $('#name-input').val();
-      var name=name.trim();
-      console.log(name.length);
-      if(name.length>0) {
+        var name = $('#name-input').val();
+        if (name.length > 2) {
             var message = "Welcome, " + name;
             $('.main .user-name').text(message);
             $('.welcome-screen').addClass('hidden');
             $('.main').removeClass('hidden');
         } else {
-          $('#name-input').addClass('error');
-          $('#name-input').attr('placeholder','Invalid text!!!!!!');
-          $('#name-input').addClass('a');
+            $('#name-input').addClass('error');
         }
     });
     $('.play-icon').on('click', function() {
