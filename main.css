@@ -63,9 +63,18 @@ h1 {
 .player-buttons {
     display:flex;
     font-size: 1.5rem;
-    justify-content: center;
+    justify-content:center;
     align-items: center;
 }
+
+.fast-buttons {
+    display:flex;
+    font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    padding-left: -50px;
+}
+
 
 .hidden {
     display: none;
@@ -139,7 +148,8 @@ h1 {
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(255,255,255,0.5);
     min-height: 30px;
-    cursor: pointer;
+    cursor: pointer !important;
+    background-color: red;
 }
 
 .song > span {
@@ -171,13 +181,15 @@ h1 {
 }
 
 .current-song-image {
-    height: 100px;
-    width: 100px;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    height: 60px;
+    width: 80px;
     margin-right: 1rem;
 }
 
 .current-song-name {
-    font-size: 1.4rem;
+    font-size: 1rem;
     margin-top: 4px;
     margin-bottom: 0;
 }
@@ -203,4 +215,9 @@ table.dataTable tbody tr {
     margin-bottom: 1rem;
     font-size: 16px;
 }
-        
+.mar{
+  margin-left: 20px;
+}
+.marR{
+  margin-right: 20px;
+}
