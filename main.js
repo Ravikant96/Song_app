@@ -89,7 +89,7 @@ $('.song-duration-bar').text(duration);
   // $('#song3 .song-artist').text(artistList[2]);
   // $('#song4 .song-artist').text(artistList[3]);
   var songs = [{
-        'name': 'Badri Ki Dulhania (Title Track)',
+        'name': 'Tamma Tamma',
         'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
         'album': 'Badrinath ki Dulhania',
         'duration': '2:56',
