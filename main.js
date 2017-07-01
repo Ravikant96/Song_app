@@ -3,11 +3,13 @@ function toggleSong() {
   if(song.paused == true) {
   console.log('Playing');
   $('.play-icon').removeClass('fa-play').addClass('fa-pause');
+  $('.play-icon').attr('title','Pause');
   song.play();
   }
   else {
   console.log('Pausing');
   $('.play-icon').removeClass('fa-pause').addClass('fa-play');
+  $('.play-icon').attr('title','Play');
   song.pause();
   }
 }
@@ -32,18 +34,18 @@ return ret;
 }
 
 
-function updateCurrentTime() {
-var song = document.querySelector('audio');
-var currentTime = Math.floor(song.currentTime);
-currentTime = fancyTimeFormat(currentTime);
-var duration = Math.floor(song.duration);
-duration = fancyTimeFormat(duration)
-var filled=(song.currentTime/song.duration);
-filled=filled*700;
-$(".progress-filled").width(filled);
-$('.time-elapsed').text(currentTime);
-$('.song-duration-bar').text(duration);
-}
+        function updateCurrentTime() {
+        var song = document.querySelector('audio');
+        var currentTime = Math.floor(song.currentTime);
+        currentTime = fancyTimeFormat(currentTime);
+        var duration = Math.floor(song.duration);
+        duration = fancyTimeFormat(duration)
+        var filled=(song.currentTime/song.duration);
+        filled=filled*700;
+        $(".progress-filled").width(filled);
+        $('.time-elapsed').text(currentTime);
+        $('.song-duration-bar').text(duration);
+        }
 
     // this function replays the song once it is fnished
           function enableLoop() {
@@ -68,12 +70,80 @@ $('.song-duration-bar').text(duration);
               }
               });
           }
-
           function changeCurrentSongDetails(songObj) {
         $('.current-song-image').attr('src','img/' + songObj.image)
         $('.current-song-name').text(songObj.name)
         $('.current-song-album').text(songObj.album)
       }
+
+
+
+    function changeForword(songname) {
+      var song = document.querySelector('audio');
+      var currentSong=song.src;
+      //var songname =['song1.mp3','song2.mp3','song3.mp3','song4.mp3']
+      var j;
+      for(var i=0;i<songname.length;i++)
+      {
+      if(currentSong.search(songname[i].fileName) != -1)
+      {
+        j=i;
+        break;
+      }
+      }
+      if(j+1==songname.length)
+      {
+        song.src=songname[0].fileName;
+        toggleSong();
+        changeCurrentSongDetails(songname[0]);
+      }
+      else
+      {
+        song.src=songname[j+1].fileName;
+        toggleSong();
+        changeCurrentSongDetails(songname[j+1]);
+      }
+      }
+
+      function changeBackword(songname) {
+        var song = document.querySelector('audio');
+        var currentSong=song.src;
+        //var songname =['song1.mp3','song2.mp3','song3.mp3','song4.mp3']
+        var j;
+        for(var i=0;i<songname.length;i++)
+        {
+        if(currentSong.search(songname[i].fileName) != -1)
+        {
+          j=i;
+          break;
+        }
+        }
+        if(j==0)
+        {
+          song.src=songname[songname.length-1].fileName;
+          toggleSong();
+          changeCurrentSongDetails(songname[songname.length-1]);
+        }
+        else
+        {
+          song.src=songname[j-1].fileName;
+          toggleSong();
+          changeCurrentSongDetails(songname[j-1]);
+        }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   window.onload = function() {
     // var songList = ['Badri Ki Dulhania (Title Track)',
@@ -122,6 +192,12 @@ $('.song-duration-bar').text(duration);
     }]
     changeCurrentSongDetails(songs[0]);
 
+    $('.forward').on('click',function(){
+      changeForword(songs);
+    });
+    $('.backward').on('click',function(){
+      changeBackword(songs);
+    });
     //   for(var i =0; i < songList.length;i++) {
     //     var name = '#song' + (i+1);
     //     var song = $(name);
