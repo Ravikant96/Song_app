@@ -132,8 +132,15 @@ return ret;
         }
         }
 
+        function lang(songs)
+        {
 
-
+        }
+        function randomExcluded(min, max, excluded) {
+    var n = Math.floor(Math.random() * (max-min) + min);
+    if (n >= excluded) n++;
+    return n;
+}
 
 
 
@@ -189,86 +196,130 @@ return ret;
         'duration': '2:29',
         'fileName': 'song4.mp3',
         'image':'song4.jpg'
+    },
+    {
+        'name': 'Illahi!!',
+        'artist': 'Arijit Singh',
+        'album': 'Yeh Jawani Diwani',
+        'duration': '3:32',
+        'fileName': 'song5.mp3',
+        'image':'song5.jpg'
     }]
-    changeCurrentSongDetails(songs[0]);
 
-    $('.forward').on('click',function(){
-      changeForword(songs);
-    });
-    $('.backward').on('click',function(){
-      changeBackword(songs);
-    });
-    //   for(var i =0; i < songList.length;i++) {
-    //     var name = '#song' + (i+1);
-    //     var song = $(name);
-    //     song.find('.song-name').text(songList[i]);
-    //     song.find('.song-artist').text(artistList[i]);
-    // }
-      // for(var i=0;i<fileNames.length;i++)
-      // {
-      //   addSongOnClickEvent(fileNames[i],i+1);
-      // }
+    var englishSongs = [{
+          'name': 'Alone',
+          'artist': 'Alan Walker',
+          'album': 'Motets',
+          'duration': '2:56',
+         'fileName': 'song1.mp3',
+         'image':'song1.jpg'
+      },
+      {
+          'name': 'Faded',
+          'artist': 'Iselin Solheim',
+          'album': 'Alan Walker',
+          'duration': '3:15',
+          'fileName': 'song2.mp3',
+          'image':'song2.jpg'
+      },
+      {
+          'name': 'Let Me Do ',
+          'artist': 'Ed-Sheeran',
+          'album': '-',
+          'duration': '2:34',
+          'fileName': 'song3.mp3',
+          'image':'song3.jpg'
+      },
+      {
+          'name': 'Closer',
+          'artist': 'Halsey',
+          'album': 'The Chainsmoker',
+          'duration': '2:29',
+          'fileName': 'song4.mp3',
+          'image':'song4.jpg'
+      },
+      {
+          'name': 'Lean On',
+          'artist': 'Major Lazer, DJ Snake,MØ',
+          'album': 'NBA2K16',
+          'duration': '3:32',
+          'fileName': 'song5.mp3',
+          'image':'song5.jpg'
+      }]
 
-      for(var i =0; i < songs.length;i++) {
-        var obj = songs[i];
-        var name = '#song' + (i+1);
-        var song = $(name);
-        song.find('.song-name').text(obj.name);
-        song.find('.song-artist').text(obj.artist);
-        song.find('.song-album').text(obj.album);
-        song.find('.song-length').text(obj.duration);
-        addSongNameClickEvent(obj,i+1);
+            changeCurrentSongDetails(songs[0]);
+            for(var i =0; i < songs.length;i++) {
+              var obj = songs[i];
+              var name = '#song' + (i+1);
+              var song = $(name);
+              song.find('.song-name').text(obj.name);
+              song.find('.song-artist').text(obj.artist);
+              song.find('.song-album').text(obj.album);
+              song.find('.song-length').text(obj.duration);
+              addSongNameClickEvent(obj,i+1);
+          }
+        //   $('.forward').on('click',function(){
+        //   changeForword(songs);
+        // });
+        // $('.backward').on('click',function(){
+        //   changeBackword(songs);
+        // });
+        //
+        var currentSongNumber = 1;
+        var willLoop = 0;
+        var willShuffle = 0;
+        $('.fa-repeat').on('click',function() {
+          $('.fa-repeat').toggleClass('disabled')
+          willLoop = 1 - willLoop;
+        });
+        $('.fa-random').on('click',function() {
+          $('.fa-random').toggleClass('disabled')
+          willShuffle = 1 - willShuffle;
+        });
+        $('audio').on('ended',function() {
+          var audio = document.querySelector('audio');
+          if(currentSongNumber < 5) {
+              var nextSongObj = songs[currentSongNumber];
+              audio.src = nextSongObj.fileName; // Change Soure
+              toggleSong(); // Play Next Song
+              changeCurrentSongDetails(nextSongObj); // Update Image
+              currentSongNumber = currentSongNumber + 1; // Change State
+          }
+          else {
+              $('.play-icon').removeClass('fa-pause').addClass('fa-play');
+              audio.currentTime = 0;
+          }
+        });
+        //this is the code to shuffle the song
+        $('audio').on('ended',function() {
+    var audio = document.querySelector('audio');
+    if (willShuffle == 1) {
+        var nextSongNumber = randomExcluded(1,5,currentSongNumber); // Calling our function from Stackoverflow
+        var nextSongObj = songs[nextSongNumber-1];
+        audio.src = nextSongObj.fileName;
+        toggleSong();
+        changeCurrentSongDetails(nextSongObj);
+        currentSongNumber = nextSongNumber;
     }
-      // $('#song1').click(function() {
-      //   var audio = document.querySelector('audio');
-      //   var currentSong = audio.src;
-      //   if(currentSong.search(fileNames[0]) != -1)
-      //   {
-      //   toggleSong();
-      //   }
-      //   else {
-      //   audio.src = fileNames[0];
-      //   toggleSong();
-      //   }
-      //   });
-      //   $('#song2').click(function() {
-      //   var audio = document.querySelector('audio');
-      //   var currentSong = audio.src;
-      //   if(currentSong.search(fileNames[1]) != -1)
-      //   {
-      //   toggleSong();
-      //   }
-      //   else {
-      //   audio.src = fileNames[1];
-      //   toggleSong();
-      //   }
-      //   });
-      //   $('#song3').click(function() {
-      //   var audio = document.querySelector('audio');
-      //   var currentSong = audio.src;
-      //   if(currentSong.search(fileNames[2]) != -1)
-      //   {
-      //   toggleSong();
-      //   }
-      //   else {
-      //   audio.src = fileNames[2];
-      //   toggleSong();
-      //   }
-      //   });
-      //   $('#song4').click(function() {
-      //   var audio = document.querySelector('audio');
-      //   var currentSong = audio.src;
-      //   if(currentSong.search(fileNames[3]) != -1)
-      //   {
-      //   toggleSong();
-      //   }
-      //   else {
-      //   audio.src = fileNames[3];
-      //   toggleSong();
-      //   }
-      //   });
-
-        enableLoop();
+    else if(currentSongNumber < 5) {
+        var nextSongObj = songs[currentSongNumber];
+        audio.src = nextSongObj.fileName;
+        toggleSong();
+        changeCurrentSongDetails(nextSongObj);
+        currentSongNumber = currentSongNumber + 1;
+    }
+    else if(willLoop == 1) {
+        var nextSongObj = songs[0];
+        audio.src = nextSongObj.fileName;
+        toggleSong();
+        changeCurrentSongDetails(nextSongObj);
+        currentSongNumber =  1;
+    }
+    else {
+        $('.play-icon').removeClass('fa-pause').addClass('fa-play');
+        audio.currentTime = 0;
+    }
+})
       updateCurrentTime();
       setInterval(function() {
       updateCurrentTime();
@@ -276,6 +327,63 @@ return ret;
     $('#songs').DataTable({
         paging: false
     });
+
+
+// 
+//     var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+//     var audioElement = document.getElementById('audioElement');
+//     var audioSrc = audioCtx.createMediaElementSource(audioElement);
+//     var analyser = audioCtx.createAnalyser();
+//
+//     // Bind our analyser to the media element source.
+//     audioSrc.connect(analyser);
+//     audioSrc.connect(audioCtx.destination);
+//     var frequencyData = new Uint8Array(200);
+//
+// var svgHeight = '300';
+// var svgWidth = '1200';
+// var barPadding = '1';
+//
+// function createSvg(parent, height, width) {
+//   return d3.select(parent).append('svg').attr('height', height).attr('width', width);
+// }
+//
+// var svg = createSvg('body', svgHeight, svgWidth);
+//
+// // Create our initial D3 chart.
+// svg.selectAll('rect')
+//    .data(frequencyData)
+//    .enter()
+//    .append('rect')
+//    .attr('x', function (d, i) {
+//       return i * (svgWidth / frequencyData.length);
+//    })
+//    .attr('width', svgWidth / frequencyData.length - barPadding);
+//    function renderChart() {
+//    requestAnimationFrame(renderChart);
+//
+//    // Copy frequency data to frequencyData array.
+//    analyser.getByteFrequencyData(frequencyData);
+//
+//    // Update d3 chart with new data.
+//    svg.selectAll('rect')
+//       .data(frequencyData)
+//       .attr('y', function(d) {
+//          return svgHeight - d;
+//       })
+//       .attr('height', function(d) {
+//          return d;
+//       })
+//       .attr('fill', function(d) {
+//          return 'rgb(0, 0, ' + d + ')';
+//       });
+// }
+//
+// // Run the loop
+// renderChart();
+
+
+
   }
 
 
@@ -293,7 +401,7 @@ $('.welcome-screen button').on('click', function() {
 $('.play-icon').on('click', function() {
     toggleSong();
 });
-$('body').on('keypress', function(event) {
+$('#body').on('keypress', function(event) {
             if (event.keyCode == 32) {
                 toggleSong();
             }
