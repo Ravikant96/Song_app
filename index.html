@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
-<body>
+<body id="body">
     <div class="wrapper">
         <section class="welcome-screen hidden">
             <h1> Welcome to Songify </h1>
@@ -25,6 +25,21 @@
             </header>
             <section class="content">
                 <audio src="song1.mp3"></audio>
+                <div class="sidebar">
+                  <h2 style="text-align:center;font-size:30px"><i><u>Languages</u></i></h2>
+                  <ul class="size clickable">
+                    <li id="hindi">Hindi</li>
+                    <li id="english">English</li>
+                    <li>Regionals
+                      <ul class="small-size">
+                        <li id="bhojpuri">Bhojpuri</li>
+                        <li id="telgu">Telgu</li>
+                        <li id="punjabi">Punjabi</li>
+                        <li id="haryanvi">Haryanvi</li>
+                    </li>
+                  </ul>
+                </div>
+                <div>
                 <table id="songs">
     <thead class="list-headers">
             <tr><td> Title </td>
@@ -57,28 +72,39 @@
                 <td class="song-album"></td>
                 <td class="song-length"></td>
             </tr>
+            <tr class="song clickable" id="song5">
+                <td class="song-name"></td>
+                <td class="song-artist"></td>
+                <td class="song-album"></td>
+                <td class="song-length"></td>
+            </tr>
         <!-- </div> -->
     </tbody></table>
+  </div>
             </section>
             <footer>
-              <div class="current-song-wrapper">
-              <img class="current-song-image">
               <div>
-              <p class="current-song-name"></p>
-              <p class="current-song-album"></p>
-             	</div>
-              </div>
+                <div class="current-song-wrapper">
+                <img class="current-song-image">
+                <div>
+                <p class="current-song-name"></p>
+                <p class="current-song-album"></p>
+               	</div>
+                </div>
+             </div>
                 <div class="controls">
-                  <!-- <div class="fast-buttons">
-                    <i class="fa fa-fast-forward" aria-hidden="true"></i>
-                  </div>   -->
-                    <div class="player-buttons">
-                       <i title="Prev Song" class="fa fa-fast-backward clickable marR backward" aria-hidden="true"></i><i title="play song"class="fa fa-play clickable play-icon" aria-hidden="true"></i><i title="Next Song" class="fa fa-fast-forward clickable mar forward" aria-hidden="true"></i>
-                    </div>
-                    <div class="progress-wrapper">
+                  <div class="player-buttons">
+                    <i class="fa fa-random clickable disabled" aria-hidden="true"></i>
+                    <i class="fa fa-step-backward clickable" aria-hidden="true"></i>
+                    <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
+                    <i class="fa fa-step-forward clickable" aria-hidden="true"></i>
+                    <i class="fa fa-repeat disabled clickable" aria-hidden="true"></i>
+                  </div>
+
+                    <div class="progress-wrapper clickable seek">
                         <span class="time-elapsed"> </span>
                         <div class="player-progress">
-                            <div class="progress-filled" id="fill"> </div>
+                            <div class="progress-filled" id="fill"></div>
                         </div>
                         <span class="song-duration-bar"></span>
                     </div>
