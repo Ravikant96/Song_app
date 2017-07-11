@@ -22,6 +22,9 @@ h1 {
     height: 100%;
     width: 100%;
     background-color: #BBB;
+    background-image: url("back-img.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .welcome-screen {
@@ -29,10 +32,77 @@ h1 {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /*justify-content: center;*/
+    /*align-items: center;*/
 }
+.detail-box{
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  /*align-items: center;*/
+}
+/*.detail-box input{
+  padding: 10px;
+}*/
+input[class=FN]{
+      width: 300px; height:40px; border-radius:15px;
+      padding: 12px 20px;
+      margin: 8px 0;
+      font-size: 20px;
+      font-family: cursive;
+      font-weight: italic;
+      box-sizing: border-box;
+      border: none;
+      background-color: #3CBC8D;
+      color: white;
 
+}
+.LOGIN{
+  width: 100px;
+  height: 40px;
+  border-radius: 25px;
+  background-color: grey;
+  font-weight: bold;
+  font-family: cursive;
+}
+.detail-box .a{
+  font-size: 20px;
+  font-weight: bolder;
+  font-family:
+}
+.box-p{
+  display: flex;
+  /*text-align:center;*/
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.a{
+  display: flex;
+  /*text-align:center;*/
+  justify-content: center;
+}
+.welcome{
+  margin-top: -30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wc-msg{
+  font-family: cursive;
+  font-size: 60px;
+  font-weight: bolder;
+  color: #60BD08;
+}
+.tag-line{
+  position: fixed;
+  top: 90px;
+  left: 725px;
+  font-family: serif;
+  font-size: 20px;
+  color: #EA0202;
+}
 .main {
     width: 100%;
     height: 100%;
@@ -43,7 +113,7 @@ h1 {
 }
 
 .main header {
-    height: 80px;
+    height: 60px;
     background-color: #282828;
     padding: 1rem;
     color: #FFF;
@@ -85,7 +155,11 @@ h1 {
 .right.floated {
     float: right;
 }
-
+.user-name{
+  padding-right: 20px;
+  font-style: italic;
+  font-family: cursive;
+}
 .clickable {
     cursor: pointer;
 }
@@ -247,4 +321,23 @@ table.dataTable tbody tr {
 
 .fa.disabled {
     color: gray;
+}
+
+.bord{
+  border-left-style: solid;
+  border-left-color: #00ff00;
+  border-left-width: 6px;
+}
+li {
+  color: lime; /* bullet color */
+}
+li span{
+  color:white;
+}
+
+
+.song:hover {background-color: grey}
+.logout{
+  border-radius: 10px;
+
 }

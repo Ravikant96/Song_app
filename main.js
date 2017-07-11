@@ -258,13 +258,15 @@ return ret;
               song.find('.song-length').text(obj.duration);
               addSongNameClickEvent(obj,i+1);
           }
-        //   $('.forward').on('click',function(){
-        //   changeForword(songs);
-        // });
-        // $('.backward').on('click',function(){
-        //   changeBackword(songs);
-        // });
-        //
+          $('.forward').on('click',function(){
+          changeForword(songs);
+        });
+        $('.backward').on('click',function(){
+          changeBackword(songs);
+        });
+        $('#english').on('click',function(){
+          alert('Work is under progress..... It will be fixed soon.');
+        });
         var currentSongNumber = 1;
         var willLoop = 0;
         var willShuffle = 0;
@@ -320,6 +322,23 @@ return ret;
         audio.currentTime = 0;
     }
 })
+
+//volume k liye function
+// $(function() {
+// $( "#slider" ).slider();
+// });
+// var slider = $('#slider');
+// slider.slider({
+//   range: "min",
+//   value: 35,
+// });
+$('#LG').on('click',function(){
+  $('.welcome-screen').removeClass('hidden');
+  $('.main').addClass('hidden');
+  var song=document.querySelector('audio');
+  song.src="  ";
+});
+
       updateCurrentTime();
       setInterval(function() {
       updateCurrentTime();
@@ -327,60 +346,52 @@ return ret;
     $('#songs').DataTable({
         paging: false
     });
+$(function() {
+
+var slider = $('#slider'),
+tooltip = $('.tooltip');
+
+tooltip.hide();
+
+slider.slider({
+range: "min",
+min: 1,
+value: 35,
+
+start: function(event,ui) {
+tooltip.fadeIn('fast');
+},
+
+slide: function(event, ui) {
+
+var value = slider.slider('value'),
+volume = $('.volume');
+
+tooltip.css('left', value).text(ui.value);
+
+if(value <= 5) {
+volume.css('background-position', '0 0');
+}
+else if (value <= 25) {
+volume.css('background-position', '0 -25px');
+}
+else if (value <= 75) {
+volume.css('background-position', '0 -50px');
+}
+else {
+volume.css('background-position', '0 -75px');
+};
+
+},
+
+stop: function(event,ui) {
+tooltip.fadeOut('fast');
+},
+});
+
+});
 
 
-// 
-//     var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-//     var audioElement = document.getElementById('audioElement');
-//     var audioSrc = audioCtx.createMediaElementSource(audioElement);
-//     var analyser = audioCtx.createAnalyser();
-//
-//     // Bind our analyser to the media element source.
-//     audioSrc.connect(analyser);
-//     audioSrc.connect(audioCtx.destination);
-//     var frequencyData = new Uint8Array(200);
-//
-// var svgHeight = '300';
-// var svgWidth = '1200';
-// var barPadding = '1';
-//
-// function createSvg(parent, height, width) {
-//   return d3.select(parent).append('svg').attr('height', height).attr('width', width);
-// }
-//
-// var svg = createSvg('body', svgHeight, svgWidth);
-//
-// // Create our initial D3 chart.
-// svg.selectAll('rect')
-//    .data(frequencyData)
-//    .enter()
-//    .append('rect')
-//    .attr('x', function (d, i) {
-//       return i * (svgWidth / frequencyData.length);
-//    })
-//    .attr('width', svgWidth / frequencyData.length - barPadding);
-//    function renderChart() {
-//    requestAnimationFrame(renderChart);
-//
-//    // Copy frequency data to frequencyData array.
-//    analyser.getByteFrequencyData(frequencyData);
-//
-//    // Update d3 chart with new data.
-//    svg.selectAll('rect')
-//       .data(frequencyData)
-//       .attr('y', function(d) {
-//          return svgHeight - d;
-//       })
-//       .attr('height', function(d) {
-//          return d;
-//       })
-//       .attr('fill', function(d) {
-//          return 'rgb(0, 0, ' + d + ')';
-//       });
-// }
-//
-// // Run the loop
-// renderChart();
 
 
 
