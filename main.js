@@ -344,6 +344,7 @@ $('#LG').on('click',function(){
 $(".fa-bar-chart").click(function(){
 
 $(this).toggleClass("active");
+var equal=0;
 if(equal==0)
 {
 
