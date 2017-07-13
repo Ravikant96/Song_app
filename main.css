@@ -341,3 +341,19 @@ li span{
   border-radius: 10px;
 
 }
+/*css fir volume*/
+.volume-controls {
+  display: flex;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+}
+.player-slider {
+  -webkit-appearance: none;
+  height: 8px;
+  width: 100px !important;
+  background-color: #3d3d3d;
+  border-radius: 4px;
+  margin-right: 6px;
+  margin-left: 6px;
+}
